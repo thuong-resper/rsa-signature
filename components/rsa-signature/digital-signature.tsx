@@ -290,9 +290,9 @@ export default function DigitalSignature() {
 	}
 
 	return (
-		<Box component="section" my={{ xs: 2, md: 8 }}>
-			<Container>
-				<Paper elevation={3}>
+		<Box component="section" sx={{ backgroundColor: '#EDF7FA', minHeight: '100vh', pt: { md: 8 } }}>
+			<Container sx={{ p: 0 }}>
+				<Paper elevation={0}>
 					<Stack direction="column" alignItems="center" sx={{ width: '100%', px: 2 }}>
 						<Snackbar
 							anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
@@ -444,7 +444,7 @@ export default function DigitalSignature() {
 									<Typography
 										variant="body1"
 										sx={{
-											width: { md: 575, xs: 220 },
+											width: { md: 575, xs: 200 },
 											p: 1,
 											backgroundColor: '#00000014',
 											borderRadius: 4,
@@ -499,7 +499,7 @@ export default function DigitalSignature() {
 									<Typography
 										variant="body1"
 										sx={{
-											width: { md: 677, xs: 322 },
+											width: { md: 677, xs: 200 },
 											my: 1,
 											p: 1,
 											backgroundColor: '#00000014',
@@ -556,7 +556,7 @@ export default function DigitalSignature() {
 									<Typography
 										variant="body1"
 										sx={{
-											width: { md: 575, xs: 220 },
+											width: { md: 575, xs: 200 },
 											p: 1,
 											backgroundColor: '#00000014',
 											borderRadius: 4,
@@ -611,7 +611,7 @@ export default function DigitalSignature() {
 									<Typography
 										variant="body1"
 										sx={{
-											width: { md: 677, xs: 322 },
+											width: { md: 677, xs: 200 },
 											my: 1,
 											p: 1,
 											backgroundColor: '#00000014',
