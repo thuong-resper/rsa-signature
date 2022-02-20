@@ -86,26 +86,6 @@ export let overrideTheme = createTheme({
 			defaultProps: {
 				underline: 'none',
 			},
-			// styleOverrides:
-			// 	mode === 'light'
-			// 		? {
-			// 			root: {
-			// 				color: common.black,
-			// 				'&:hover, &.active': {
-			// 					color: blue[500],
-			// 				},
-			// 				'&.m_active': { backgroundColor: blue[50], color: blue[500] },
-			// 			},
-			// 		}
-			// 		: {
-			// 			root: {
-			// 				color: common.white,
-			// 				'&.active': {
-			// 					color: blue[500],
-			// 				},
-			// 				'&.m_active': { backgroundColor: '#90caf929', color: common.white },
-			// 			},
-			// 		},
 		},
 		MuiButton: {
 			styleOverrides: {

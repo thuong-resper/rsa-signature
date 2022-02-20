@@ -228,6 +228,15 @@ export default function DigitalSignature() {
 		})
 	}
 
+	function arrayEquals(a: any, b: any) {
+		return (
+			Array.isArray(a) &&
+			Array.isArray(b) &&
+			a.length === b.length &&
+			a.every((val, index) => val === b[index])
+		)
+	}
+
 	const checking = () => {
 		if (!values.selectedCheckingFile || !values.checkingContent) {
 			setValues({
@@ -244,12 +253,22 @@ export default function DigitalSignature() {
 			)
 		}
 		const txtFileContentChecking = arrayChecking.join(', ')
-		setValues({
-			...values,
-			message: 'Văn bản đã xác thực',
-			openSnackbar: true,
-			resultFileChecking: txtFileContentChecking,
-		})
+		const isEqual = arrayEquals(values.content, arrayChecking)
+		if (isEqual) {
+			setValues({
+				...values,
+				message: 'Xác thực thành công',
+				openSnackbar: true,
+				resultFileChecking: txtFileContentChecking,
+			})
+		} else {
+			setValues({
+				...values,
+				message: 'Xác thực thất bại',
+				openSnackbar: true,
+				resultFileChecking: txtFileContentChecking,
+			})
+		}
 	}
 
 	const saveFile = () => {
@@ -271,7 +290,7 @@ export default function DigitalSignature() {
 	}
 
 	return (
-		<Box component="section" my={8}>
+		<Box component="section" my={{ xs: 2, md: 8 }}>
 			<Container>
 				<Paper elevation={3}>
 					<Stack direction="column" alignItems="center" sx={{ width: '100%', px: 2 }}>
@@ -282,7 +301,7 @@ export default function DigitalSignature() {
 							onClose={handleCloseSnackbar}
 						>
 							<Alert onClose={handleCloseSnackbar} severity="info" sx={{ width: '100%' }}>
-								{values.message}
+								<Typography variant="body2">{values.message}</Typography>
 							</Alert>
 						</Snackbar>
 						<fieldset>
@@ -296,7 +315,7 @@ export default function DigitalSignature() {
 								}}
 							>
 								<div>
-									<Typography>1. Chọn 2 số nguyên tố ngẫu nhiên:</Typography>
+									<Typography variant="body1">1. Chọn 2 số nguyên tố ngẫu nhiên:</Typography>
 								</div>
 								<Box
 									sx={{
@@ -304,9 +323,13 @@ export default function DigitalSignature() {
 										alignItems: 'center',
 									}}
 								>
-									<Typography sx={{ ml: { xs: 0, md: 2 } }}>p</Typography>
+									<Typography variant="body1" sx={{ ml: { xs: 0, md: 2 } }}>
+										p
+									</Typography>
 									<Chip variant="basic" label={values.p} size="small" sx={{ ml: 1, width: 50 }} />
-									<Typography sx={{ ml: 2 }}>q</Typography>
+									<Typography variant="body1" sx={{ ml: 2 }}>
+										q
+									</Typography>
 									<Chip variant="basic" label={values.q} size="small" sx={{ ml: 1, width: 50 }} />
 								</Box>
 							</Box>
@@ -324,7 +347,9 @@ export default function DigitalSignature() {
 										justifyContent: 'space-between',
 									}}
 								>
-									<Typography mr={1}>2. Khóa bí mật:</Typography>
+									<Typography variant="body1" mr={1}>
+										2. Khóa bí mật:
+									</Typography>
 									<FormControl
 										sx={{ my: 1, width: { xs: '20ch', md: '25ch' } }}
 										size="small"
@@ -357,8 +382,11 @@ export default function DigitalSignature() {
 										justifyContent: 'space-between',
 									}}
 								>
-									<Typography mr={1}>Khóa công khai</Typography>
+									<Typography variant="body1" mr={1}>
+										Khóa công khai
+									</Typography>
 									<Typography
+										variant="body1"
 										sx={{
 											width: { xs: '20ch', md: '25ch' },
 											my: 1,
@@ -380,14 +408,14 @@ export default function DigitalSignature() {
 								}}
 							>
 								<Tooltip title="Chọn ngẫu nhiên">
-									{/* generate random two prime small than 20 */}
-									<Button variant="contained" sx={{ mr: 1 }} onClick={() => generateTwoPrime(20)}>
-										Ngẫu nhiên
+									{/* generate random two prime small than 50 */}
+									<Button variant="contained" sx={{ mr: 1 }} onClick={() => generateTwoPrime(50)}>
+										<Typography variant="body1">Ngẫu nhiên</Typography>
 									</Button>
 								</Tooltip>
 								<Tooltip title="Tạo khóa">
 									<Button variant="contained" onClick={() => generateKey()}>
-										Sinh khóa
+										<Typography variant="body1">Sinh khóa</Typography>
 									</Button>
 								</Tooltip>
 							</Box>
@@ -402,7 +430,9 @@ export default function DigitalSignature() {
 									alignItems: 'center',
 								}}
 							>
-								<Typography minWidth={{ xs: '100%', md: '10%' }}>Văn bản</Typography>
+								<Typography variant="body1" minWidth={{ xs: '100%', md: '10%' }}>
+									Văn bản
+								</Typography>
 								<Box
 									sx={{
 										width: '100%',
@@ -412,8 +442,9 @@ export default function DigitalSignature() {
 									}}
 								>
 									<Typography
+										variant="body1"
 										sx={{
-											width: { md: 575, xs: 225 },
+											width: { md: 575, xs: 220 },
 											p: 1,
 											backgroundColor: '#00000014',
 											borderRadius: 4,
@@ -441,7 +472,7 @@ export default function DigitalSignature() {
 													// loading={selectedFile}
 													loadingPosition="end"
 												>
-													Chọn
+													<Typography variant="body1">Chọn</Typography>
 												</LoadingButton>
 											</label>
 										</Tooltip>
@@ -454,7 +485,9 @@ export default function DigitalSignature() {
 									alignItems: 'center',
 								}}
 							>
-								<Typography minWidth={{ xs: '100%', md: '10%' }}>Kết quả</Typography>
+								<Typography variant="body1" minWidth={{ xs: '100%', md: '10%' }}>
+									Kết quả
+								</Typography>
 								<Box
 									sx={{
 										width: '100%',
@@ -464,6 +497,7 @@ export default function DigitalSignature() {
 									}}
 								>
 									<Typography
+										variant="body1"
 										sx={{
 											width: { md: 677, xs: 322 },
 											my: 1,
@@ -475,7 +509,7 @@ export default function DigitalSignature() {
 											whiteSpace: 'nowrap',
 										}}
 									>
-										{values.fileResult ? values.fileResult : 'File'}
+										{values.fileResult ? values.fileResult : 'Nội dung'}
 									</Typography>
 								</Box>
 							</Box>
@@ -491,10 +525,10 @@ export default function DigitalSignature() {
 									disabled={!values.fileResult}
 									onClick={() => saveFile()}
 								>
-									Xuất kết quả
+									<Typography variant="body1">Xuất kết quả </Typography>
 								</Button>
 								<Button variant="contained" disabled={!values.selectedFile} onClick={() => sign()}>
-									Ký văn bản
+									<Typography variant="body1">Ký văn bản</Typography>
 								</Button>
 							</Box>
 						</fieldset>
@@ -508,7 +542,9 @@ export default function DigitalSignature() {
 									alignItems: 'center',
 								}}
 							>
-								<Typography minWidth={{ xs: '100%', md: '10%' }}>Văn bản</Typography>
+								<Typography variant="body1" minWidth={{ xs: '100%', md: '10%' }}>
+									Văn bản
+								</Typography>
 								<Box
 									sx={{
 										width: '100%',
@@ -518,8 +554,9 @@ export default function DigitalSignature() {
 									}}
 								>
 									<Typography
+										variant="body1"
 										sx={{
-											width: { md: 575, xs: 225 },
+											width: { md: 575, xs: 220 },
 											p: 1,
 											backgroundColor: '#00000014',
 											borderRadius: 4,
@@ -547,7 +584,7 @@ export default function DigitalSignature() {
 													// loading={selectedFile}
 													loadingPosition="end"
 												>
-													Chọn
+													<Typography variant="body1">Chọn</Typography>
 												</LoadingButton>
 											</label>
 										</Tooltip>
@@ -560,7 +597,9 @@ export default function DigitalSignature() {
 									alignItems: 'center',
 								}}
 							>
-								<Typography minWidth={{ xs: '100%', md: '10%' }}>Kết quả</Typography>
+								<Typography variant="body1" minWidth={{ xs: '100%', md: '10%' }}>
+									Kết quả
+								</Typography>
 								<Box
 									sx={{
 										width: '100%',
@@ -570,6 +609,7 @@ export default function DigitalSignature() {
 									}}
 								>
 									<Typography
+										variant="body1"
 										sx={{
 											width: { md: 677, xs: 322 },
 											my: 1,
@@ -581,7 +621,7 @@ export default function DigitalSignature() {
 											whiteSpace: 'nowrap',
 										}}
 									>
-										{values.resultFileChecking ? values.resultFileChecking : 'File'}
+										{values.resultFileChecking ? values.resultFileChecking : 'Nội dung'}
 									</Typography>
 								</Box>
 							</Box>
@@ -597,14 +637,14 @@ export default function DigitalSignature() {
 									disabled={!values.fileResult}
 									onClick={() => saveCheckingFile()}
 								>
-									Xuất kết quả
+									<Typography variant="body1">Xuất kết quả</Typography>
 								</Button>
 								<Button
 									variant="contained"
 									disabled={!values.selectedCheckingFile}
 									onClick={() => checking()}
 								>
-									Xác thực
+									<Typography variant="body1">Xác thực</Typography>
 								</Button>
 							</Box>
 						</fieldset>
