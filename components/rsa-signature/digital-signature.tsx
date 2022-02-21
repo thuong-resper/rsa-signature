@@ -5,7 +5,6 @@ import LoadingButton from '@mui/lab/LoadingButton'
 import {
 	Alert,
 	Box,
-	Button,
 	Chip,
 	Container,
 	FormControl,
@@ -16,15 +15,16 @@ import {
 	Snackbar,
 	Stack,
 	Tooltip,
-	Typography,
+	Typography
 } from '@mui/material'
+import { ColorButton } from 'components/UI/button'
 import React, { useEffect, useState } from 'react'
 import {
 	generatePrimeList,
 	getBalanceNumber,
 	getPrivateKey,
 	moduloInverseEuclidean,
-	randomizeTwoPrime,
+	randomizeTwoPrime
 } from './rsa-signature'
 
 export interface IDigitalSignatureProps {}
@@ -290,9 +290,9 @@ export default function DigitalSignature() {
 	}
 
 	return (
-		<Box component="section" sx={{ backgroundColor: '#EDF7FA', minHeight: '100vh', pt: { md: 8 } }}>
+		<Box component="section" sx={{ minHeight: '100vh', pt: { md: 8 } }}>
 			<Container sx={{ p: 0 }}>
-				<Paper elevation={0}>
+				<Paper elevation={0} sx={{ backgroundColor: '#e65100' }}>
 					<Stack direction="column" alignItems="center" sx={{ width: '100%', px: 2 }}>
 						<Snackbar
 							anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
@@ -356,6 +356,7 @@ export default function DigitalSignature() {
 										variant="outlined"
 									>
 										<OutlinedInput
+											sx={{ backgroundColor: 'white' }}
 											id="outlined-adornment-password"
 											type={values.showPassword ? 'text' : 'password'}
 											value={values.privateKey}
@@ -391,7 +392,7 @@ export default function DigitalSignature() {
 											width: { xs: '20ch', md: '25ch' },
 											my: 1,
 											p: 1,
-											backgroundColor: '#00000014',
+											backgroundColor: 'white',
 											borderRadius: 4,
 											textOverflow: 'ellipsis',
 											overflow: 'hidden',
@@ -409,14 +410,18 @@ export default function DigitalSignature() {
 							>
 								<Tooltip title="Chọn ngẫu nhiên">
 									{/* generate random two prime small than 50 */}
-									<Button variant="contained" sx={{ mr: 1 }} onClick={() => generateTwoPrime(50)}>
+									<ColorButton
+										variant="contained"
+										sx={{ mr: 1 }}
+										onClick={() => generateTwoPrime(50)}
+									>
 										<Typography variant="body1">Ngẫu nhiên</Typography>
-									</Button>
+									</ColorButton>
 								</Tooltip>
 								<Tooltip title="Tạo khóa">
-									<Button variant="contained" onClick={() => generateKey()}>
+									<ColorButton variant="contained" onClick={() => generateKey()}>
 										<Typography variant="body1">Sinh khóa</Typography>
-									</Button>
+									</ColorButton>
 								</Tooltip>
 							</Box>
 						</fieldset>
@@ -446,7 +451,7 @@ export default function DigitalSignature() {
 										sx={{
 											width: { md: 575, xs: 200 },
 											p: 1,
-											backgroundColor: '#00000014',
+											backgroundColor: 'white',
 											borderRadius: 4,
 											textOverflow: 'ellipsis',
 											overflow: 'hidden',
@@ -471,6 +476,12 @@ export default function DigitalSignature() {
 													endIcon={<FileUploadIcon />}
 													// loading={selectedFile}
 													loadingPosition="end"
+													sx={{
+														backgroundColor: '#9e9e9e',
+														'&:hover': {
+															backgroundColor: '#757575',
+														},
+													}}
 												>
 													<Typography variant="body1">Chọn</Typography>
 												</LoadingButton>
@@ -502,7 +513,7 @@ export default function DigitalSignature() {
 											width: { md: 677, xs: 200 },
 											my: 1,
 											p: 1,
-											backgroundColor: '#00000014',
+											backgroundColor: 'white',
 											borderRadius: 4,
 											textOverflow: 'ellipsis',
 											overflow: 'hidden',
@@ -519,17 +530,21 @@ export default function DigitalSignature() {
 									my: 1,
 								}}
 							>
-								<Button
+								<ColorButton
 									variant="contained"
 									sx={{ mr: 1 }}
 									disabled={!values.fileResult}
 									onClick={() => saveFile()}
 								>
 									<Typography variant="body1">Xuất kết quả </Typography>
-								</Button>
-								<Button variant="contained" disabled={!values.selectedFile} onClick={() => sign()}>
+								</ColorButton>
+								<ColorButton
+									variant="contained"
+									disabled={!values.selectedFile}
+									onClick={() => sign()}
+								>
 									<Typography variant="body1">Ký văn bản</Typography>
-								</Button>
+								</ColorButton>
 							</Box>
 						</fieldset>
 						<fieldset>
@@ -558,7 +573,7 @@ export default function DigitalSignature() {
 										sx={{
 											width: { md: 575, xs: 200 },
 											p: 1,
-											backgroundColor: '#00000014',
+											backgroundColor: 'white',
 											borderRadius: 4,
 											textOverflow: 'ellipsis',
 											overflow: 'hidden',
@@ -583,6 +598,12 @@ export default function DigitalSignature() {
 													endIcon={<FileUploadIcon />}
 													// loading={selectedFile}
 													loadingPosition="end"
+													sx={{
+														backgroundColor: '#9e9e9e',
+														'&:hover': {
+															backgroundColor: '#757575',
+														},
+													}}
 												>
 													<Typography variant="body1">Chọn</Typography>
 												</LoadingButton>
@@ -614,7 +635,7 @@ export default function DigitalSignature() {
 											width: { md: 677, xs: 200 },
 											my: 1,
 											p: 1,
-											backgroundColor: '#00000014',
+											backgroundColor: 'white',
 											borderRadius: 4,
 											textOverflow: 'ellipsis',
 											overflow: 'hidden',
@@ -631,21 +652,21 @@ export default function DigitalSignature() {
 									my: 1,
 								}}
 							>
-								<Button
+								<ColorButton
 									variant="contained"
 									sx={{ mr: 1 }}
 									disabled={!values.fileResult}
 									onClick={() => saveCheckingFile()}
 								>
 									<Typography variant="body1">Xuất kết quả</Typography>
-								</Button>
-								<Button
+								</ColorButton>
+								<ColorButton
 									variant="contained"
 									disabled={!values.selectedCheckingFile}
 									onClick={() => checking()}
 								>
 									<Typography variant="body1">Xác thực</Typography>
-								</Button>
+								</ColorButton>
 							</Box>
 						</fieldset>
 					</Stack>

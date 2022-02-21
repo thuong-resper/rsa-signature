@@ -89,11 +89,10 @@ export let overrideTheme = createTheme({
 		},
 		MuiButton: {
 			styleOverrides: {
-				// Name of the slot
-				root: {
-					// Some CSS
+				contained: {
 					fontFamily: 'sans-serif',
 					textTransform: 'none',
+					color: grey[900],
 				},
 			},
 		},
@@ -103,6 +102,7 @@ export let overrideTheme = createTheme({
 					props: { variant: 'basic' },
 					style: {
 						fontWeight: 500,
+						backgroundColor: 'white',
 					},
 				},
 				{
