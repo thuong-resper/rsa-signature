@@ -15,7 +15,7 @@ import {
 	Snackbar,
 	Stack,
 	Tooltip,
-	Typography
+	Typography,
 } from '@mui/material'
 import { ColorButton } from 'components/UI/button'
 import React, { useEffect, useState } from 'react'
@@ -24,7 +24,7 @@ import {
 	getBalanceNumber,
 	getPrivateKey,
 	moduloInverseEuclidean,
-	randomizeTwoPrime
+	randomizeTwoPrime,
 } from './rsa-signature'
 
 export interface IDigitalSignatureProps {}
@@ -292,7 +292,7 @@ export default function DigitalSignature() {
 	return (
 		<Box component="section" sx={{ minHeight: '100vh', pt: { md: 8 } }}>
 			<Container sx={{ p: 0 }}>
-				<Paper elevation={0} sx={{ backgroundColor: '#e65100' }}>
+				<Paper elevation={0}>
 					<Stack direction="column" alignItems="center" sx={{ width: '100%', px: 2 }}>
 						<Snackbar
 							anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
